@@ -1,0 +1,28 @@
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: skope.io/Dockerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    command: ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8080"]
+
+  screen:
+    build:
+      context: ..
+      dockerfile: skope.io/Dockerfile
+    env_file:
+      - .env
+    profiles: ["jobs"]
+    command: ["python", "-m", "strategy.runner", "--mode", "screen"]
+
+  manage:
+    build:
+      context: ..
+      dockerfile: skope.io/Dockerfile
+    env_file:
+      - .env
+    profiles: ["jobs"]
+    command: ["python", "-m", "strategy.runner", "--mode", "manage"]
