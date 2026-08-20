@@ -1,0 +1,22 @@
+# Cloud Run Job: NYSE-hours manage (stops / kill-switch / flatten)
+apiVersion: run.googleapis.com/v1
+kind: Job
+metadata:
+  name: skope-manage
+spec:
+  template:
+    spec:
+      template:
+        spec:
+          containers:
+            - image: REGION-docker.pkg.dev/PROJECT/REPO/skope-io:latest
+              command: ["python", "-m", "strategy.runner", "--mode", "manage"]
+              env:
+                - name: ALPACA_IS_PAPER
+                  value: "true"
+              resources:
+                limits:
+                  cpu: "1"
+                  memory: 512Mi
+          timeoutSeconds: 300
+          maxRetries: 1

@@ -1,0 +1,23 @@
+# Cloud Run Job: premarket screen (Finviz + Finnhub + Gemini → Neon)
+# Deploy after building image to Artifact Registry.
+apiVersion: run.googleapis.com/v1
+kind: Job
+metadata:
+  name: skope-screen
+spec:
+  template:
+    spec:
+      template:
+        spec:
+          containers:
+            - image: REGION-docker.pkg.dev/PROJECT/REPO/skope-io:latest
+              command: ["python", "-m", "strategy.runner", "--mode", "screen"]
+              env:
+                - name: ALPACA_IS_PAPER
+                  value: "true"
+              resources:
+                limits:
+                  cpu: "1"
+                  memory: 512Mi
+          timeoutSeconds: 900
+          maxRetries: 1

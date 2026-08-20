@@ -5,6 +5,11 @@
 Deploy marker: `deploy 4.5.83`
 
 ### Added
+- **`skope.io` premarket momentum sniping desk scaffold.** New add-on under
+  ``skope.io/`` with Finviz + Finnhub screening, Gemini ranking, Alpaca
+  1-click execution API, Neon trade logging, Cloud Run job schedules
+  (London screen window + NYSE manage window), Docker packaging, and a
+  Netlify kinetic-typography dashboard.
 - **AI agents can now operate generic option and multi-leg workflows through
   built-in LumiBot tools.** Agents can retrieve chains and strikes, inspect
   exact-contract Greeks and market quality, find listed strikes by delta,
